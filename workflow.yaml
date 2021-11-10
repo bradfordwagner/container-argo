@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: argo-image-
+spec:
+  entrypoint: build-argo-image
+  arguments:
+    parameters:
+    - name: tag
+      value: latest
+    - name: git_ref_type
+      value: tags
+  templates:
+  - name: build-argo-image
+    inputs:
+      parameters:
+      - name: tag
+      - name: git_ref_type
+    steps:
+    - - name: mirror-image
+        templateRef:
+          name: flavor-image-mirror-template
+          template: "{{ inputs.parameters.git_ref_type }}"
+        arguments:
+          parameters:
+          - name: git_repo
+            value: https://github.com/bradfordwagner/container-argo.git
+          - name: git_version
+            value: main
+          - name: repo_name
+            value: quay.io/bradfordwagner/argo
+          - name: tag
+            value: "{{inputs.parameters.tag}}"
+          - name: upstream_repo
+            value: "{{ item.repo }}"
+          - name: upstream_repo_name_override
+            value: "{{ item.name_override }}"
+          - name: upstream_tag
+            value: "{{ item.tag }}"
+        withItems:
+        - { repo: 'argoproj/argocli', tag: 'v3.2.3', name_override: argocli }
+
