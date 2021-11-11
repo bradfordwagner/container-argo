@@ -37,3 +37,4 @@ spec:
         withItems:
         - { repo: 'argoproj/argocli', tag: 'v3.2.3', name_override: argocli }
 
+
