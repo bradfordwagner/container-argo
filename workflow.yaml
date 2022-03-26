@@ -3,6 +3,8 @@ kind: Workflow
 metadata:
   generateName: argo-image-
 spec:
+  podGC:
+    strategy: OnPodSuccess # delete pods when workflow is successful
   entrypoint: build-argo-image
   arguments:
     parameters:
