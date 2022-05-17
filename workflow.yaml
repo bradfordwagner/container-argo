@@ -41,7 +41,6 @@ spec:
           - name: tag_suffix
             value: "-{{ item.name_override }}-{{ item.tag }}"
         withItems:
-        - { repo: 'quay.io/argoproj/argocli', tag: 'v3.3.1', name_override: argocli, runtime_platforms: [linux/amd64, linux/arm64] }
-        - { repo: 'quay.io/argoproj/argocli', tag: 'v3.2.4', name_override: argocli, runtime_platforms: [linux/amd64, linux/arm64] }
-        - { repo: 'quay.io/argoproj/argocli', tag: 'v3.2.3', name_override: argocli, runtime_platforms: [linux/amd64, linux/arm64] }
+        - { repo: 'quay.io/argoproj/argocli'             , tag: 'v3.3.1' , name_override: argocli , runtime_platforms: [linux/amd64 , linux/arm64] }
+        - { repo: 'quay.io/argoproj/workflow-controller' , tag: 'v3.3.5' , name_override: argocli , runtime_platforms: [linux/amd64 , linux/arm64] }
 
